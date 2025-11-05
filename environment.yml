@@ -1,0 +1,17 @@
+name: icpac-course
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib
+  - geopandas
+  - xarray
+  - rasterio
+  - rioxarray
+  - cartopy
+  - pysteps
+  - scikit-learn
+  - netCDF4
+  - jupyterlab
