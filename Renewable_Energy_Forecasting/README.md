@@ -48,3 +48,23 @@ Download from this wetranfer link:
 Open these notebooks interactively. They include runnable cells and short explanations.
 
 
+# Deployment guide (short)
+
+This repository includes a sample production Dockerfile (`Dockerfile.prod`) and CI/CD templates (`cloudbuild.yaml`, `.github/workflows/deploy.yml`) to deploy to Google Cloud Run via Artifact Registry.
+
+Quick steps:
+
+1. Create GCP project and enable APIs (Artifact Registry, Cloud Run, Cloud Build).
+2. Create two service accounts (deploy + runtime) as documented in the notebooks and grant required roles.
+3. Store the deployer service account key in GitHub secret `GCP_SA_KEY` and project ID in `GCP_PROJECT_ID`.
+4. Ensure `requirements.txt` exists and lists the application dependencies.
+5. Push to `main` — GitHub Actions will build, push and deploy the image.
+
+Files added:
+- `Dockerfile.prod` - production Dockerfile for the app
+- `cloudbuild.yaml` - example cloud build pipeline
+- `.github/workflows/deploy.yml` - GitHub Actions workflow for deployment
+
+Notes:
+- Adjust worker counts and CPU/memory settings for Cloud Run according to your expected load.
+- Treat service account keys as sensitive; rotate and limit permissions regularly.
