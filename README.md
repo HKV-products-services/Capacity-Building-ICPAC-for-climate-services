@@ -1,1 +1,3 @@
-"Capacity Building ICPAC for climate services" 
+# Capacity Building ICPAC for climate services
+
+![alt text](images/partners.png)
