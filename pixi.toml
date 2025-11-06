@@ -1,0 +1,32 @@
+[project]
+name = "icpac-course"
+version = "0.1.0"
+description = "Training materials and tools for the ICPAC capacity-building course"
+authors = ["HKV <info@hkv.nl>"]
+
+[project.dependencies]
+python = "3.11"
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+geopandas = "*"
+xarray = "*"
+rasterio = "*"
+rioxarray = "*"
+cartopy = "*"
+pysteps = "*"
+scikit-learn = "*"
+netCDF4 = "*"
+jupyterlab = "*"
+
+[tool.pixi]
+default-env = "default"
+
+[tool.pixi.environments.default]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64"]
+
+[tool.pixi.tasks]
+# convenient launch commands for participants
+notebook = "jupyter lab"
+python = "python"
