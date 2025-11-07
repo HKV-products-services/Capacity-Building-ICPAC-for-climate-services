@@ -50,10 +50,19 @@ Open these notebooks interactively. They include runnable cells and short explan
 
 # Deployment guide (short)
 
-This repository includes a sample production Dockerfile (`Dockerfile.prod`) and CI/CD templates (`cloudbuild.yaml`, `.github/workflows/deploy.yml`) to deploy to Google Cloud Run via Artifact Registry.
+This repository includes a sample production Dockerfile (`Dockerfile.prod`) and CI/CD templates (`.github/workflows/deploy.yml`) to deploy to Google Cloud Run via Artifact Registry.
 
-Quick steps:
+To test locally:
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop/), or [Podman](https://podman.io/) (open source).
+* Install the devcontainer extention in vscode.
+* `CTRL` + `Shift` + `P` > `Dev Containers: Reopen in Container`
+* Now a vscode window will open from within the container. 
 
+Initial steps:
+1. Create a github repository
+2. Login to Google Cloud Platform
+
+Deploy steps:
 1. Create GCP project and enable APIs (Artifact Registry, Cloud Run, Cloud Build).
 2. Create two service accounts (deploy + runtime) as documented in the notebooks and grant required roles.
 3. Store the deployer service account key in GitHub secret `GCP_SA_KEY` and project ID in `GCP_PROJECT_ID`.
