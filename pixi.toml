@@ -3,10 +3,12 @@ name = "icpac-course"
 version = "0.1.0"
 description = "Training materials and tools for the ICPAC capacity-building course"
 authors = ["HKV <info@hkv.nl>"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "win-64"]
 requires-python = ">=3.11"
 
-[project.dependencies]
-python = "3.11"
+[dependencies]
+python = "3.11.*"
 numpy = "*"
 pandas = "*"
 matplotlib = "*"
@@ -20,14 +22,6 @@ scikit-learn = "*"
 netCDF4 = "*"
 jupyterlab = "*"
 
-[tool.pixi]
-default-env = "default"
-
-# >>> THIS TABLE MUST EXIST — otherwise pixi throws the “missing field channels” error <<<
-[tool.pixi.environment.default]
-channels = ["conda-forge"]
-platforms = ["linux-64", "win-64"]
-
-[tool.pixi.tasks]
+[tasks]
 notebook = "jupyter lab"
 python = "python"
