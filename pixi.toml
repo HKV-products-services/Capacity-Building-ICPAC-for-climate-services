@@ -21,6 +21,8 @@ scikit-learn = "*"
 netCDF4 = "*"
 jupyterlab = "*"
 ecmwf-opendata = "*"
+cfgrib = "*"
+eccodes = "*"
 
 [tasks]
 notebook = "jupyter lab"
