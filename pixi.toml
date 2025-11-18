@@ -5,10 +5,9 @@ description = "Training materials and tools for the ICPAC capacity-building cour
 authors = ["HKV <info@hkv.nl>"]
 channels = ["conda-forge"]
 platforms = ["linux-64", "win-64"]
-requires-python = ">=3.11"
 
 [dependencies]
-python = "3.11.*"
+python = ">=3.11"
 numpy = "*"
 pandas = "*"
 matplotlib = "*"
