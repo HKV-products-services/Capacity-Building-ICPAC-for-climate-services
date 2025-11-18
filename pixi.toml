@@ -20,6 +20,7 @@ pysteps = "*"
 scikit-learn = "*"
 netCDF4 = "*"
 jupyterlab = "*"
+ecmwf-opendata = "*"
 
 [tasks]
 notebook = "jupyter lab"
