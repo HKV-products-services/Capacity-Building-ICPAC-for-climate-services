@@ -23,6 +23,10 @@ jupyterlab = "*"
 ecmwf-opendata = "*"
 cfgrib = "*"
 eccodes = "*"
+ipyleaflet = "*"
+ipywidgets = "*"
+jupyterlab = "*"
+nodejs = "*"  # Required for JupyterLab extensions
 
 [tasks]
 notebook = "jupyter lab"
