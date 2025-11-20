@@ -26,6 +26,7 @@ eccodes = "*"
 ipyleaflet = "*"
 ipywidgets = "*"
 jupyterlab = "*"
+folium = "*"
 nodejs = "*"  # Required for JupyterLab extensions
 
 [tasks]
