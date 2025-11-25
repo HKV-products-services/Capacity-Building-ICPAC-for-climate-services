@@ -27,6 +27,7 @@ ipywidgets = "*"
 jupyterlab = "*"
 folium = "*"
 nodejs = "*"  # Required for JupyterLab extensions
+toml = ">=0.10.2,<0.11"
 
 [tasks]
 notebook = "jupyter lab"
