@@ -27,7 +27,10 @@ ipywidgets = "*"
 jupyterlab = "*"
 folium = "*"
 nodejs = "*"  # Required for JupyterLab extensions
-toml = ">=0.10.2,<0.11"
+toml = "*"
+pyproj = "*"           # For CRS and reprojection
+pyresample = "*"       # For AreaDefinition and get_area_extent
+satpy = "*"            # For get_area_extent (satellite data processing)
 
 [tasks]
 notebook = "jupyter lab"
