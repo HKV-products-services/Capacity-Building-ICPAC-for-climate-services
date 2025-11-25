@@ -1,0 +1,164 @@
+root: /data/shared/hydroMT_data/hydromt_east_africa/
+
+esa_worldcover_2021:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: landuse
+  path: esa_worldcover_2021.tif
+Delta_DTM:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: elevation
+  path: delta_DTM.tif
+soilgrids_2020:
+  alias: soilgrids_v2.0
+soilgrids_v2.0:
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 2400
+      y: 2400
+  meta:
+    category: soil
+    notes: "soilthickness is based on 1) soilgrids (global) and 2) dataset for Eurasia\
+      \ (ESDAC, 2004; Panagos et al., 2012): ESDAC, 2004. The european soil database\
+      \ distribution version 2.0, european commission and the European soil bureau\
+      \ network.  esdac.jrc.ec.europa.eu, accessed: 2017-11-17.  Panagos, P., Van\
+      \ Liedekerke, M., Jones, A., Montanarella, L., 2012. European soil data centre:\
+      \ Response to european policy support  and public data requirements. Land Use\
+      \ Policy 29 (2), 329\xE2\u20AC\u201C338. \n"
+    paper_doi: https://doi.org/10.5194/soil-2020-65
+    paper_ref: de Sousa et al. (2020)
+    source_license: CC BY 4.0
+    source_url: https://www.isric.org/explore/soilgrids/faq-soilgrids
+    source_version: 2020
+  path: soilgrids_data/*.tif
+merit_hydro:
+  alias: merit_hydro_v1.0
+merit_hydro_v1.0:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 60
+      y: 60
+  meta:
+    category: topography
+    paper_doi: 10.1029/2019WR024873
+    paper_ref: Yamazaki et al. (2019)
+    source_license: CC-BY-NC 4.0 or ODbL 1.0
+    source_url: http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_Hydro
+    source_version: 1.0
+  path: merit_hydro_data/*.tif
+merit_hydro_index:
+  alias: merit_hydro_index_v1.0
+merit_hydro_index_v1.0:
+  crs: 4326
+  data_type: GeoDataFrame
+  driver: vector
+  meta:
+    category: topography
+    paper_doi: 10.5194/hess-2020-582
+    paper_ref: Eilander et al. (in review)
+    source_license: CC-BY-NC 4.0
+  path: merit_hydro_data/merit_hydro_index.geojson
+rivers_lin2019_v1:
+  data_type: GeoDataFrame
+  driver: vector
+  meta:
+    category: hydrography
+    paper_doi: 10.5281/zenodo.3552776
+    paper_ref: Lin et al. (2019)
+    source_license: CC-BY-NC 4.0
+    source_url: https://zenodo.org/record/3552776#.YVbOrppByUk
+    source_version: 1
+  path: rivers_lin2019_v1.geojson
+  rename:
+    width_m: rivwth
+    Q2: qbankfull
+chelsa:
+  alias: chelsa_v1.2 
+chelsa_v1.2:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: meteo
+    paper_doi: 10.1038/sdata.2017.122
+    paper_ref: Karger et al. (2017)
+    source_license: CC BY 4.0
+    source_url: http://chelsa-climate.org/downloads/
+    source_version: 1.2
+  path: chelsa.tif
+koppen_geiger:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 360
+      y: 360
+  meta:
+    category: meteo
+    paper_doi: 10.1127/0941-2948/2006/0130
+    paper_ref: Kottek et al. (2006)
+    source_url: http://koeppen-geiger.vu-wien.ac.at/present.htm
+    source_version: 2017
+  nodata: 0
+  path: koppen_geiger.tif
+modis_lai:
+  alias: modis_mcd15a3h_v006
+modis_mcd15a3h_v006:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 360
+      y: 360
+    concat: true
+  meta:
+    category: landuse
+    notes: this dataset has been extracted from GEE ('MODIS/006/MCD15A3H') for the
+      period '2003-01-01', '2017-12-31'
+    paper_doi: 10.5067/MODIS/MCD15A3H.006
+    paper_ref: Myneni et al (2015)
+    source_license: https://lpdaac.usgs.gov/data/data-citation-and-policies/
+    source_url: https://lpdaac.usgs.gov/products/mcd15a3hv006/
+    source_version: MCD15A3H V006
+  path: modis_lai_data/*.tif
+vito:
+  alias: vito_2015_v2.0.2
+vito_2015_v2.0.2:
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: landuse
+    paper_doi: 10.5281/zenodo.3939038
+    paper_ref: Buchhorn et al (2020)
+    source_url: https://land.copernicus.eu/global/products/lc
+    source_version: v2.0.2
+  path: vito_landuse.tif
