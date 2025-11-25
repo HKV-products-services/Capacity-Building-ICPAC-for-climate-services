@@ -1,0 +1,54 @@
+steps:
+  - setup_config:
+      data:
+        time.timestepsecs: 86400
+        output.netcdf_grid.path: output.nc
+        output.netcdf_grid.compressionlevel: 1
+        output.netcdf_grid.variables.river_water__volume_flow_rate: q_av
+
+  - setup_basemaps:
+      hydrography_fn: merit_hydro_v1.0
+      basin_index_fn: merit_hydro_index_v1.0
+      upscale_method: ihu
+      res: 0.00833333
+      region:
+        subbasin: [41.866, 9.593]
+        strord: 4
+
+  - setup_rivers:
+      hydrography_fn: merit_hydro_v1.0
+      river_upa: 10
+      rivdph_method: powlaw
+      min_rivdph: 1
+      min_rivwth: 30
+      slope_len: 2000
+      smooth_len: 5000
+      river_routing: kinematic_wave
+
+  - setup_riverwidth:
+      precip_fn: chelsa
+      climate_fn: koppen_geiger
+      predictor: discharge
+      fill: False
+      min_wth: 1
+
+  - setup_lulcmaps:
+      lulc_fn: vito
+
+  - setup_laimaps:
+      lai_fn: modis_mcd15a3h_v006
+
+  - setup_soilmaps:
+      soil_fn: soilgrids_2020
+      ptf_ksatver: brakensiek
+
+  - setup_outlets:
+      river_only: True
+
+  - setup_constant_pars:
+      "subsurface_water__horizontal_to_vertical_saturated_hydraulic_conductivity_ratio": 100
+      "snowpack__degree_day_coefficient": 3.75653
+      "soil_surface_water__infiltration_reduction_parameter": 0.038
+      "vegetation_canopy_water__mean_evaporation_to_mean_precipitation_ratio": 0.11
+      "compacted_soil_surface_water__infiltration_capacity": 5
+      "soil_water_saturated_zone_bottom__max_leakage_volume_flux": 0
