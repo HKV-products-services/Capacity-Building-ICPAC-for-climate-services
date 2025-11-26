@@ -13,3 +13,5 @@ venv/
 
 **.ecmwfapirc
 1_IBF_Renewable_Energy/data/
+2_IBF_Flood_Damage/3_Flood_Damage_Model/data/
+2_IBF_Flood_Damage/3_Flood_Damage_Model/output/

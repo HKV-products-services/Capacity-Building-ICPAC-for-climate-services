@@ -1,0 +1,17 @@
+[project]
+name = "fiat"
+channels = ["conda-forge"]
+platforms = ["linux-64", "win-64"]
+
+[dependencies]
+python = "3.11.*"
+gdal = "*"  # Add this - installs pre-built binaries from conda-forge
+geopandas = "*"
+rasterio= "*"
+xarray = "*"
+libgdal-netcdf = "*"
+
+[pypi-dependencies]
+delft-fiat = "*"
+ipykernel = "*"
+toml = "*"
