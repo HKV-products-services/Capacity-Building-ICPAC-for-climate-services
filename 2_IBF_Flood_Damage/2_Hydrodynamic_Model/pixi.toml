@@ -1,7 +1,7 @@
 [project]
 name = "hydromt_sfincs"
 version = "0.1.0"
-description = "HydroMT + SFINCS environment (converted from environment.yml)"
+description = "HydroMT + SFINCS environment"
 channels = ["conda-forge"]
 platforms = ["linux-64"]
 
@@ -42,3 +42,25 @@ folium = "*"
 jupyterlab = "*"
 notebook = "*"
 ipykernel = "*"
+
+
+# Define the default environment
+[environments]
+default = { solve-group = "default" }
+
+# Tasks for kernel registration
+[tasks]
+# Automatically setup kernel after install
+postinstall = "setup-kernel"
+
+# Register the hydromt_sfincs kernel with user's Jupyter
+setup-kernel = "python -m ipykernel install --user --name hydromt_sfincs --display-name 'hydromt_sfincs (pixi)'"
+
+# Start JupyterLab
+notebook = "jupyter lab"
+
+# List installed kernels
+list-kernels = "jupyter kernelspec list"
+
+# Remove the hydromt_sfincs kernel
+clean-kernel = "jupyter kernelspec remove -f hydromt_sfincs || echo 'Kernel not found'"

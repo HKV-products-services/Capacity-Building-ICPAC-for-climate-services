@@ -2,6 +2,26 @@
 
 This folder contains code, notebooks and data references used to prepare and evaluate renewable energy forecasts (solar, wind, hydropower) using ERA5 reanalysis, AIFS forecasts and local climatologies. 
 
+## Install environment
+
+Open the terminal and run:
+
+```bash
+pixi install
+```
+
+After installing run the following to add the kernel to Jupyter:
+
+```bash
+pixi run setup-kernel
+```
+
+Finally you are able to start Jupyter Lab with:
+
+```bash
+pixi run notebook
+```
+
 ## What you'll find here
 
 - Notebooks that walk through data preprocessing and power calculations (see `*.ipynb`).
@@ -46,34 +66,3 @@ Download from this wetranfer link:
 - `plot.py` — small helper for plotting results used by notebooks.
 
 Open these notebooks interactively. They include runnable cells and short explanations.
-
-
-# Deployment guide (short)
-
-This repository includes a sample production Dockerfile (`Dockerfile.prod`) and CI/CD templates (`.github/workflows/deploy.yml`) to deploy to Google Cloud Run via Artifact Registry.
-
-To test locally:
-* Install [Docker Desktop](https://www.docker.com/products/docker-desktop/), or [Podman](https://podman.io/) (open source).
-* Install the devcontainer extention in vscode.
-* `CTRL` + `Shift` + `P` > `Dev Containers: Reopen in Container`
-* Now a vscode window will open from within the container. 
-
-Initial steps:
-1. Create a github repository
-2. Login to Google Cloud Platform
-
-Deploy steps:
-1. Create GCP project and enable APIs (Artifact Registry, Cloud Run, Cloud Build).
-2. Create two service accounts (deploy + runtime) as documented in the notebooks and grant required roles.
-3. Store the deployer service account key in GitHub secret `GCP_SA_KEY` and project ID in `GCP_PROJECT_ID`.
-4. Ensure `requirements.txt` exists and lists the application dependencies.
-5. Push to `main` — GitHub Actions will build, push and deploy the image.
-
-Files added:
-- `Dockerfile.prod` - production Dockerfile for the app
-- `cloudbuild.yaml` - example cloud build pipeline
-- `.github/workflows/deploy.yml` - GitHub Actions workflow for deployment
-
-Notes:
-- Adjust worker counts and CPU/memory settings for Cloud Run according to your expected load.
-- Treat service account keys as sensitive; rotate and limit permissions regularly.
