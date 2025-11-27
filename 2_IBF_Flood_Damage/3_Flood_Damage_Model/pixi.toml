@@ -3,15 +3,38 @@ name = "fiat"
 channels = ["conda-forge"]
 platforms = ["linux-64", "win-64"]
 
+# Main dependencies (used by default environment)
 [dependencies]
 python = "3.11.*"
-gdal = "*"  # Add this - installs pre-built binaries from conda-forge
+gdal = "*"
 geopandas = "*"
-rasterio= "*"
+rasterio = "*"
 xarray = "*"
 libgdal-netcdf = "*"
+jupyterlab = "*"
+ipykernel = "*"
 
 [pypi-dependencies]
 delft-fiat = "*"
-ipykernel = "*"
 toml = "*"
+
+# Define the default environment
+[environments]
+default = { solve-group = "default" }
+
+# Tasks for kernel registration
+[tasks]
+# Automatically setup kernel after install
+postinstall = "setup-kernel"
+
+# Register the FIAT kernel with user's Jupyter
+setup-kernel = "python -m ipykernel install --user --name fiat --display-name 'FIAT (pixi)'"
+
+# Start JupyterLab
+notebook = "jupyter lab"
+
+# List installed kernels
+list-kernels = "jupyter kernelspec list"
+
+# Remove the FIAT kernel
+clean-kernel = "jupyter kernelspec remove -f fiat || echo 'Kernel not found'"

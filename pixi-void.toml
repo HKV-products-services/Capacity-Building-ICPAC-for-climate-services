@@ -1,0 +1,140 @@
+[project]
+name = "icpac-climate-services"
+version = "0.1.0"
+description = "ICPAC Climate Services Training Course"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+
+# ============================================================================
+# MAIN ENVIRONMENT - ICPAC Course
+# ============================================================================
+[dependencies]
+python = ">=3.10,<3.12"
+jupyterlab = ">=4.0"
+ipykernel = ">=6.0"
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+# Add other common course dependencies
+
+[pypi-dependencies]
+# Common PyPI packages
+
+# ============================================================================
+# FIAT FEATURE - Flood Impact Assessment Tool
+# ============================================================================
+[feature.fiat.dependencies]
+# Core geospatial stack - MUST be from conda on Windows
+gdal = "*"
+geopandas = "*"
+rasterio = "*"
+fiona = "*"
+shapely = "*"
+pyproj = "*"
+# Add other FIAT conda dependencies
+
+[feature.fiat.pypi-dependencies]
+delft-fiat = "*"
+# Add other FIAT PyPI dependencies (but NOT gdal or packages that depend on GDAL C libraries)
+
+# ============================================================================
+# ENVIRONMENTS
+# ============================================================================
+[environments]
+# Main course environment
+default = { solve-group = "default" }
+
+# FIAT environment (includes FIAT feature)
+fiat = { features = ["fiat"], solve-group = "fiat" }
+
+# ============================================================================
+# TASKS
+# ============================================================================
+[tasks]
+# Automatic setup after install
+postinstall = { depends-on = ["setup-kernels"] }
+
+# Setup all kernels
+setup-kernels = { depends-on = ["_setup-main-kernel", "_setup-fiat-kernel"] }
+
+# Setup main course kernel
+_setup-main-kernel = """
+python -c "
+import json
+from pathlib import Path
+
+kernel_spec = {
+    'argv': ['pixi', 'run', 'python', '-m', 'ipykernel_launcher', '-f', '{connection_file}'],
+    'display_name': 'ICPAC Course (pixi)',
+    'language': 'python',
+    'metadata': {
+        'debugger': True
+    }
+}
+
+kernel_dir = Path.home() / '.local/share/jupyter/kernels/icpac-course'
+kernel_dir.mkdir(parents=True, exist_ok=True)
+(kernel_dir / 'kernel.json').write_text(json.dumps(kernel_spec, indent=2))
+print(f'✓ Installed kernel: ICPAC Course (pixi)')
+print(f'  Location: {kernel_dir}')
+"
+"""
+
+# Setup FIAT kernel (runs in default env but creates kernel spec for fiat env)
+_setup-fiat-kernel = """
+python -c "
+import json
+from pathlib import Path
+
+kernel_spec = {
+    'argv': ['pixi', 'run', '-e', 'fiat', 'python', '-m', 'ipykernel_launcher', '-f', '{connection_file}'],
+    'display_name': 'FIAT (pixi)',
+    'language': 'python',
+    'metadata': {
+        'debugger': True
+    }
+}
+
+kernel_dir = Path.home() / '.local/share/jupyter/kernels/icpac-fiat'
+kernel_dir.mkdir(parents=True, exist_ok=True)
+(kernel_dir / 'kernel.json').write_text(json.dumps(kernel_spec, indent=2))
+print(f'✓ Installed kernel: FIAT (pixi)')
+print(f'  Location: {kernel_dir}')
+"
+"""
+
+# Start JupyterLab
+lab = "jupyter lab"
+
+# Start JupyterLab from fiat environment
+lab-fiat = "pixi run -e fiat jupyter lab"
+
+# List available kernels
+list-kernels = "jupyter kernelspec list"
+
+# Remove all custom kernels (for troubleshooting)
+clean-kernels = """
+jupyter kernelspec remove -f icpac-course 2>/dev/null || true
+jupyter kernelspec remove -f icpac-fiat 2>/dev/null || true
+echo 'Cleaned up kernels. Run: pixi run setup-kernels'
+"""
+
+# Verify FIAT installation
+verify-fiat = "pixi run -e fiat python -c \"import fiat;\""
+
+# Show environment info
+info = """
+echo "=== ICPAC Climate Services - Environment Info ==="
+echo ""
+echo "Available environments:"
+echo "  • default (ICPAC Course)"
+echo "  • fiat (Flood Impact Assessment Tool)"
+echo ""
+echo "Available tasks:"
+echo "  pixi run lab          - Start JupyterLab"
+echo "  pixi run setup-kernels - Install Jupyter kernels"
+echo "  pixi run list-kernels  - List available kernels"
+echo "  pixi run verify-fiat   - Verify FIAT installation"
+echo ""
+pixi info
+"""

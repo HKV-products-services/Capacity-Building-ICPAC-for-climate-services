@@ -1,0 +1,44 @@
+[project]
+name = "hydromt_sfincs"
+version = "0.1.0"
+description = "HydroMT + SFINCS environment (converted from environment.yml)"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+# core
+python = "3.11.*"
+hydromt = "0.10.*"
+hydromt_sfincs = "1.2.*"
+hydromt_wflow = "0.8.*"
+
+# geo / hydro stack
+geopandas = "*"
+rasterio = "*"
+rioxarray = "*"
+xarray = "*"
+xugrid = "*"
+cartopy = "*"
+pyproj = "*"
+shapely = "*"
+pyogrio = "*"
+netcdf4 = "*"
+hdf5 = "*"
+
+# numerics / data
+numpy = "*"
+scipy = "*"
+pandas = "*"
+dask = "*"
+numba = "*"
+scikit-learn = "*"
+zarr = "*"
+pyarrow = "*"
+
+# viz / notebooks
+matplotlib = "*"
+bokeh = "*"
+folium = "*"
+jupyterlab = "*"
+notebook = "*"
+ipykernel = "*"
