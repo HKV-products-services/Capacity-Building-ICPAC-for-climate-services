@@ -1,5 +1,5 @@
 meta:
-  root: /data/shared/hydroMT_data/hydromt_east_africa/
+  root: ../../data/hydroMT_data/hydromt_east_africa/
   
 Delta_DTM:
   data_type: RasterDataset
