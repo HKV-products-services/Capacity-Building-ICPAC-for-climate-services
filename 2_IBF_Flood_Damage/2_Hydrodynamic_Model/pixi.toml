@@ -10,7 +10,6 @@ platforms = ["linux-64"]
 python = "3.11.*"
 hydromt = "0.10.*"
 hydromt_sfincs = "1.2.*"
-hydromt_wflow = "0.8.*"
 
 # geo / hydro stack
 geopandas = "*"
