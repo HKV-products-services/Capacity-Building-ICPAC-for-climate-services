@@ -1,47 +1,39 @@
 [project]
-name = "hydromt_sfincs"
+name = "hydromt_SFINCS_v3"
 version = "0.1.0"
 description = "HydroMT + SFINCS environment"
 channels = ["conda-forge"]
-platforms = ["linux-64"]
+platforms = ["linux-64", "win-64"]
 
 [dependencies]
 # core
-python = "3.11.*"
-hydromt = "0.10.*"
-hydromt_sfincs = "1.2.*"
+python = "*"
+pip = "*"
 
-# geo / hydro stack
-geopandas = "*"
-rasterio = "*"
-rioxarray = "*"
+
+
+# typical stack
+# requests = "*"
+# aiohttp = "*"
 xarray = "*"
-xugrid = "*"
-cartopy = "*"
+numpy = "*"
+pandas = "*"
+# scipy = "*"
+rasterio = "*"
+geopandas = "*"
 pyproj = "*"
 shapely = "*"
-pyogrio = "*"
+matplotlib-base = "*"
+dask-core = "*"
 netcdf4 = "*"
-hdf5 = "*"
+# fsspec = "*"
+pyyaml = "*"
+cartopy= "*"
+hydromt_sfincs ="*"
 
-# numerics / data
-numpy = "*"
-scipy = "*"
-pandas = "*"
-dask = "*"
-numba = "*"
-scikit-learn = "*"
-zarr = "*"
-pyarrow = "*"
-
-# viz / notebooks
-matplotlib = "*"
-bokeh = "*"
-folium = "*"
+# jupyter
 jupyterlab = "*"
-notebook = "*"
 ipykernel = "*"
-
 
 # Define the default environment
 [environments]
@@ -53,7 +45,7 @@ default = { solve-group = "default" }
 postinstall = "setup-kernel"
 
 # Register the hydromt_sfincs kernel with user's Jupyter
-setup-kernel = "python -m ipykernel install --user --name hydromt_sfincs --display-name 'hydromt_sfincs (pixi)'"
+setup-kernel = "python -m ipykernel install --user --name hydromt_sfincs2 --display-name 'hydromt_sfincs (pixi)'"
 
 # Start JupyterLab
 notebook = "jupyter lab"
