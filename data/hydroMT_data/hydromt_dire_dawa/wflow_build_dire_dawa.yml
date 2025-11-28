@@ -1,0 +1,79 @@
+setup_config:                # options parsed to wflow ini file <section>.<option>
+  starttime: 2010-01-01T00:00:00
+  endtime: 2010-03-31T00:00:00
+  timestepsecs: 86400
+  input.path_forcing: inmaps-era5-2010.nc
+
+setup_basemaps:
+  hydrography_fn: merit_hydro   # source hydrography data {merit_hydro, merit_hydro_1k}
+  basin_index_fn: merit_hydro_index # source of basin index corresponding to hydrography_fn
+  upscale_method: ihu           # upscaling method for flow direction data, by default 'ihu'
+  res: 0.00833333    # the spatial resolution of the model
+
+setup_rivers:
+  hydrography_fn: merit_hydro      # source hydrography data, should correspond to hydrography_fn in setup_basemaps
+  river_upa: 10               # minimum upstream area threshold for the river map [km2]
+  rivdph_method: powlaw           # method to estimate depth {'powlaw', 'manning', 'gvf'}
+  min_rivdph: 1                # minimum river depth [m]
+  min_rivwth: 30               # minimum river width [m]
+  slope_len: 2000             # length over which tp calculate river slope [m]
+  smooth_len: 5000             # length over which to smooth river depth and river width [m]
+  hc: 0.63
+  river_routing: local-inertial  # {'kinematic-wave', 'local-inertial'}
+
+setup_riverwidth:
+  precip_fn: chelsa        # source for precip climatology used to estimate discharge: {chelsa}
+  climate_fn: koppen_geiger # source for climate classification used to estimate discharge: {koppen_geiger}
+  predictor: discharge     # predictor used in power-law w=a*predictor^b {'discharge'; 'uparea', other staticmaps}; a and b can also be set here.
+  fill: False         # if False all river width values are set based on predictor, if True only data gaps and lakes/reservoirs in observed width are filled (works only with MERIT hydro)
+  min_wth: 1             # global minimum width
+
+setup_floodplains: # if 1D floodplains are required
+  hydrography_fn: merit_hydro      # source hydrography data, should correspond to hydrography_fn in setup_basemaps
+  floodplain_type: 1d    # If one-dimensional floodplains are required
+  flood_depths: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0] # flood depths at which a volume is derived
+
+# setup_reservoirs:
+#   reservoirs_fn: hydro_reservoirs  # source for reservoirs based on GRAND: {hydro_reservoirs}; None to skip
+#   min_area: 1.0           # minimum reservoir area to consider [km2] - changed to 10 km for catchments that have difficulties
+#   priority_jrc: True          # if True then JRC data from hydroengine is used to calculate some reservoir attributes instead of the GRanD and HydroLAKES db.   
+
+# setup_lakes:
+#   lakes_fn: hydro_lakes  # source for lakes based on hydroLAKES: {hydro_lakes}
+#   min_area: 10.0  # minimum reservoir area to consider [km2]
+
+# setup_glaciers:
+#   glaciers_fn: rgi  # source for glaciers based on Randolph Glacier Inventory {rgi}
+#   min_area: 1.0  # minimum glacier area to consider [km2]
+
+setup_lulcmaps:
+  lulc_fn: vito     # source for lulc maps: {globcover, vito, corine}
+
+setup_laimaps:
+  lai_fn: modis_lai  # source for LAI: {modis_lai}
+
+setup_soilmaps:
+  soil_fn: soilgrids_2020  # source for soilmaps: {soilgrids}
+  ptf_ksatver: brakensiek  # pedotransfer function to calculate hydraulic conductivity: {brakensiek, cosby}
+
+setup_outlets:
+  river_only: True
+
+
+
+setup_constant_pars:
+  KsatHorFrac: 100
+  Cfmax: 3.75653
+  cf_soil: 0.038
+  EoverR: 0.11
+  InfiltCapPath: 5
+  InfiltCapSoil: 600
+  MaxLeakage: 0
+  rootdistpar: -500
+  TT: 0
+  TTI: 2
+  TTM: 0
+  WHC: 0.1
+  G_Cfmax: 5.3
+  G_SIfrac: 0.002
+  G_TT: 1.3
