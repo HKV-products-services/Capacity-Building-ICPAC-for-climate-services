@@ -32,6 +32,15 @@ pyproj = "*"           # For CRS and reprojection
 pyresample = "*"       # For AreaDefinition and get_area_extent
 satpy = "*"            # For get_area_extent (satellite data processing)
 
+# Define the default environment
+[environments]
+default = { solve-group = "default" }
+
+# Tasks for kernel registration
 [tasks]
+# Automatically setup kernel after install
+postinstall = "setup-kernel"
+
+# Register the hydromt_sfincs kernel with user's Jupyter
+setup-kernel = "python -m ipykernel install --user --name capacity_building --display-name 'IBF Capacity Building (pixi)'"
 notebook = "jupyter lab"
-python = "python"
